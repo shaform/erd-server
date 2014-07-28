@@ -122,20 +122,6 @@ class Database(object):
     def title_match(self, title):
         return title in self.erd_total_dict
 
-    def random_text(self, text):
-        conn = sqlite3.connect(self.db_path)
-        c = conn.cursor()
-        if text in self.erd_total_dict:
-            erd_dict = self.erd_total_dict
-        else:
-            erd_dict = self.erd_dict
-
-        for k in erd_dict[text]:
-            c = c.execute('''select mid from entity where id = ?''', (k,))
-            ret = c.fetchone()[0]
-            return ret, 0.9
-        return None, 0.9
-
     def freebase_text(self, text, topn=1):
         erd_dict = self.erd_total_dict
         if text not in erd_dict:
@@ -166,26 +152,4 @@ class Database(object):
         except Exception as e:
             print('error in freebase')
             print(e)
-            return self.popular_text(text)
-
-    def popular_text(self, text):
-        conn = sqlite3.connect(self.db_path)
-        c = conn.cursor()
-        if text in self.erd_total_dict:
-            erd_dict = self.erd_total_dict
-        else:
-            erd_dict = self.erd_dict
-
-        if text not in erd_dict:
-            return None, 0.9
-
-        maxi = -1
-        maxk = None
-        for k in erd_dict[text]:
-            count = self.count_dict[k]
-            if count > maxi:
-                maxi = count
-                maxk = k
-        if maxk is not None:
-            return c.execute('''select mid from entity where id = ?''', (maxk,)).fetchone()[0], 0.9
-        return None, 0.9
+            return None, 0.1

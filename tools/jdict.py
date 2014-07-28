@@ -4,7 +4,7 @@ Insert dictionary into sqlite3 database.
 
 Usage:
     jdict.py SOURCE DEST
-    where SOURCE = path of join_3rd.tsv
+    where SOURCE = path of dictionary.tsv
           DEST   = path of db file
 """
 import sqlite3

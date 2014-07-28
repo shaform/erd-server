@@ -1,7 +1,6 @@
 import argparse
 import json
 import os.path
-import random
 import sys
 
 import db
