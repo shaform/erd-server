@@ -44,7 +44,10 @@ class TagMeAnnotator(Annotator):
                     self.entity_dict[int(key)] = value.strip()
 
     def raw_annotate(self, text, textID):
-        fpath = os.path.join('tagme', textID)
+        fdir = 'tagme'
+        if not os.path.exists(fdir):
+            os.mkdir(fdir)
+        fpath = os.path.join(fdir, textID)
         if os.path.exists(fpath):
             with open(fpath, 'r') as f:
                 jtext = f.read()
