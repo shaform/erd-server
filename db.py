@@ -53,7 +53,6 @@ class Database(object):
         c = conn.cursor()
         self.erd_dict = defaultdict(set)
         self.erd_total_dict = defaultdict(set)
-        self.count_dict = defaultdict(int)
 
         c.execute('select title, id from dict')
 
@@ -69,11 +68,6 @@ class Database(object):
                         self.erd_dict[key].add(eid)
             if len(key) > 0:
                 self.erd_total_dict[key].add(eid)
-
-        c.execute('select id, count from count')
-        for entry in c.fetchall():
-            eid, count = entry
-            self.count_dict[eid] = count
 
         self.id_dict = {}
         c.execute('''select id, mid from entity''')
