@@ -28,6 +28,7 @@ class Annotator(object):
         return inItems, outItems
 
     def get_freebase_id(self, eid):
+        eid = str(eid)
         if eid in self.entity_dict:
             return self.entity_dict[eid]
         else:
@@ -36,12 +37,7 @@ class Annotator(object):
 class TagMeAnnotator(Annotator):
     
     def __init__(self, path):
-        self.entity_dict = {}
-        if path is not None:
-            with open(path, 'r') as f:
-                for l in f:
-                    key, value = l.split('\t')
-                    self.entity_dict[int(key)] = value.strip()
+        super().__init__(path)
 
     def raw_annotate(self, text, textID):
         fdir = 'tagme'
