@@ -159,4 +159,6 @@ Notice that the server may take as much as 6GB of memory to run.
 
 ## License
 
-To be determined.
+Released under the GPLv3 License.  See the [LICENSE][license] file for further details.
+
+[license]: https://github.com/shaform/erd-server/blob/master/LICENSE
